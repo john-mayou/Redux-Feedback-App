@@ -1,0 +1,7 @@
+.flagged {
+	background-color: rgba(166, 16, 16, 0.657);
+}
+
+.not-flagged {
+	background-color: lightblue;
+}
