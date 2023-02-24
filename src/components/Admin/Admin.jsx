@@ -36,6 +36,23 @@ function Admin() {
 			});
 	};
 
+	const popupDeleteConfirmation = (id) => {
+		Swal.fire({
+			title: "Are you sure?",
+			text: "You won't be able to revert this!",
+			icon: "warning",
+			showCancelButton: true,
+			cancelButtonColor: "#3085d6",
+			confirmButtonColor: "#d33",
+			confirmButtonText: "Yes, delete it!",
+		}).then((result) => {
+			if (result.isConfirmed) {
+				Swal.fire("Deleted!", "Feedback has been removed.", "success");
+				handleDeleteFeedback(id);
+			}
+		});
+	};
+
 	const handleDeleteFeedback = (id) => {
 		axios
 			.delete(`/feedback/${id}`)
@@ -85,7 +102,7 @@ function Admin() {
 							</td>
 							<td>
 								<button
-									onClick={() => handleDeleteFeedback(id)}
+									onClick={() => popupDeleteConfirmation(id)}
 								>
 									Delete
 								</button>
