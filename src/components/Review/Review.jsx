@@ -34,6 +34,16 @@ function Review() {
 	};
 
 	const handleFinishEdit = () => {
+		switch (questionToEdit) {
+			case "feeling":
+			case "understanding":
+			case "support":
+				if (newAnswer < 1 || newAnswer > 6 || !newAnswer) {
+					alert("Please provide an answer between 1 and 6");
+					return;
+				}
+		}
+
 		dispatch({
 			type: "UPDATE_ANSWER",
 			payload: { question: questionToEdit, answer: newAnswer },
