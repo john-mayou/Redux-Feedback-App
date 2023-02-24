@@ -7,15 +7,7 @@ import { createStore, combineReducers, applyMiddleware } from "redux";
 import { Provider } from "react-redux";
 import logger from "redux-logger";
 
-const answers = (
-	state = {
-		feeling: 4,
-		understanding: 6,
-		support: 3,
-		comments: "This is a comment",
-	},
-	action
-) => {
+const answers = (state = {}, action) => {
 	switch (action.type) {
 		case "ADD_ANSWER":
 			return { ...state, ...action.payload };
