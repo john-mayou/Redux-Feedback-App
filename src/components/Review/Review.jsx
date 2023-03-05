@@ -7,11 +7,17 @@ function Review() {
 	const dispatch = useDispatch();
 	const history = useHistory();
 
-	const answers = useSelector((store) => store.answers);
+	const answers = useSelector((store) => store.answers); // redux reducer
 
-	const [questionToEdit, setQuestionToEdit] = useState("");
-	const [newAnswer, setNewAnswer] = useState("");
+	const [questionToEdit, setQuestionToEdit] = useState(""); // keeps track of what question is being edited ("" if not editing)
+	const [newAnswer, setNewAnswer] = useState(""); // local state to track edit input
 
+	/**
+	 * Helper function for renderEditField
+	 * Returns input type the question that is passed in
+	 * @param {string} question
+	 * @returns string
+	 */
 	const findInputType = (question) => {
 		const q = question;
 		if (q === "feeling" || q === "understanding" || q === "support") {
@@ -23,6 +29,7 @@ function Review() {
 		}
 	};
 
+	// Helper function for conditionally rendering an edit field
 	const renderEditField = (question) => {
 		return (
 			<input
@@ -33,14 +40,18 @@ function Review() {
 		);
 	};
 
+	/**
+	 * Dispatches updated value to redux reducer, clears inputs
+	 */
 	const handleFinishEdit = () => {
+		// validating edited input
 		switch (questionToEdit) {
 			case "feeling":
 			case "understanding":
 			case "support":
 				if (newAnswer < 1 || newAnswer > 6 || !newAnswer) {
 					alert("Please provide an answer between 1 and 6");
-					return;
+					return; // break if not valid
 				}
 		}
 
@@ -48,10 +59,16 @@ function Review() {
 			type: "UPDATE_ANSWER",
 			payload: { question: questionToEdit, answer: newAnswer },
 		});
+
+		// clear inputs
 		setQuestionToEdit("");
 		setNewAnswer("");
 	};
 
+	/**
+	 * Posts user feedback to server side
+	 * On success, resets answer reducer, goes to next page
+	 */
 	const handleSubmitFeedback = () => {
 		axios
 			.post("/feedback", answers)

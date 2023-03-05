@@ -6,8 +6,11 @@ function Comments() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
-	const [commentsInput, setCommentsInput] = useState("");
+	const [commentsInput, setCommentsInput] = useState(""); // keeps track of input value
 
+	/**
+	 * Dispatches the comments to redux reducer, goes to the next page
+	 */
 	const handleNextPage = () => {
 		dispatch({
 			type: "ADD_ANSWER",

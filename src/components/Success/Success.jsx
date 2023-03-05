@@ -3,6 +3,7 @@ import { useHistory } from "react-router-dom";
 function Success() {
 	const history = useHistory();
 
+	// Go back to beginning of app
 	const handleResetFeedbackForm = () => {
 		history.push("/");
 	};

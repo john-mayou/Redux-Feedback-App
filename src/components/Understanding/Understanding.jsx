@@ -6,8 +6,11 @@ function Understanding() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
-	const [understandingInput, setUnderstandingInput] = useState(0);
+	const [understandingInput, setUnderstandingInput] = useState(0); // keeps track of input value
 
+	/**
+	 * Dispatches input value to redux reducer, goes to next page
+	 */
 	const handleNextPage = () => {
 		if (
 			understandingInput < 1 ||

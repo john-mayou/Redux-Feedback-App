@@ -6,12 +6,16 @@ function Support() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
-	const [supportInput, setSupportInput] = useState(0);
+	const [supportInput, setSupportInput] = useState(0); // keep track of input
 
+	/**
+	 * Dispatches input value to redux reducer, goes to next page
+	 */
 	const handleNextPage = () => {
+		// input validation
 		if (supportInput < 1 || supportInput > 6 || !supportInput) {
 			alert("Please provide an answer between 1 and 6");
-			return;
+			return; // break
 		}
 		dispatch({
 			type: "ADD_ANSWER",

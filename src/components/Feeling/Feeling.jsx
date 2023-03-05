@@ -6,12 +6,15 @@ function Feeling() {
 	const history = useHistory();
 	const dispatch = useDispatch();
 
-	const [feelingInput, setFeelingInput] = useState(0);
+	const [feelingInput, setFeelingInput] = useState(0); // keeps track of input value
 
+	/**
+	 * Dispatches feeling value to redux reducer, goes to next page
+	 */
 	const handleNextPage = () => {
 		if (feelingInput < 1 || feelingInput > 6 || !feelingInput) {
 			alert("Please provide an answer between 1 and 6");
-			return;
+			return; // break if value is not valid
 		}
 		dispatch({
 			type: "ADD_ANSWER",
