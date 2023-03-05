@@ -1,3 +1,35 @@
+.table-container {
+	width: 100%;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}
+
+.feedback-table {
+	border-collapse: collapse;
+}
+
+.feedback-table__head th {
+	padding: 0.5rem 1.5rem;
+	background-color: black;
+	color: #f0f0f0;
+}
+
+.feedback-table__body td {
+	padding: 0.5rem 1.5rem;
+}
+
+tr {
+	border-bottom: 1px solid rgba(0, 0, 0, 0.517);
+}
+
+.flag-btn,
+.delete-btn {
+	padding: 0.5rem 1.5rem;
+	border-radius: 5px;
+	border: none;
+}
+
 .flagged {
 	background-color: rgba(166, 16, 16, 0.657);
 }

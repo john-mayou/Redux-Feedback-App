@@ -2,6 +2,7 @@ const express = require("express");
 const router = express.Router();
 const pool = require("../modules/pool");
 
+// GET /
 router.get("/", (req, res) => {
 	const queryText = `SELECT * FROM feedback ORDER BY id`;
 
@@ -16,9 +17,10 @@ router.get("/", (req, res) => {
 		});
 });
 
+// POST /
 router.post("/", (req, res) => {
 	const newFeedback = req.body;
-	const { feeling, understanding, support, comments } = newFeedback;
+	const { feeling, understanding, support, comments } = newFeedback; // deconstructing
 
 	const queryText = `
         INSERT INTO feedback ("feeling", "understanding", "support", "comments")
@@ -37,6 +39,7 @@ router.post("/", (req, res) => {
 		});
 });
 
+// PUT /:id
 router.put("/:id", (req, res) => {
 	const queryText = `
         UPDATE feedback SET flagged=$1 WHERE id=$2;
@@ -52,6 +55,7 @@ router.put("/:id", (req, res) => {
 		});
 });
 
+// DELETE /:id
 router.delete("/:id", (req, res) => {
 	const queryText = `
         DELETE FROM feedback WHERE id=$1;

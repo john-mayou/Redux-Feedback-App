@@ -82,53 +82,62 @@ function Admin() {
 	};
 
 	return (
-		<table>
-			<thead>
-				<tr>
-					<th>Feeling</th>
-					<th>Understanding</th>
-					<th>Support</th>
-					<th>Comments</th>
-					<th>Flag</th>
-					<th>Delete</th>
-				</tr>
-			</thead>
-			<tbody>
-				{feedbackList.map((feedback) => {
-					const {
-						id,
-						feeling,
-						understanding,
-						support,
-						comments,
-						flagged,
-					} = feedback;
-					return (
-						<tr
-							key={id}
-							className={flagged ? "flagged" : "not-flagged"}
-						>
-							<td>{feeling}</td>
-							<td>{understanding}</td>
-							<td>{support}</td>
-							<td>{comments}</td>
-							<td>
-								<button onClick={() => handleFlagFeedback(id)}>
-									Flag
-								</button>
-							</td>
-							<td>
-								<button
-									onClick={() => popupDeleteConfirmation(id)}
-								>
-									Delete
-								</button>
-							</td>
-						</tr>
-					);
-				})}
-			</tbody>
-		</table>
+		<div className="table-container">
+			<h1>Dashboard</h1>
+			<table className="feedback-table">
+				<thead className="feedback-table__head">
+					<tr>
+						<th>Feeling</th>
+						<th>Understanding</th>
+						<th>Support</th>
+						<th>Comments</th>
+						<th>Flag</th>
+						<th>Delete</th>
+					</tr>
+				</thead>
+				<tbody className="feedback-table__body">
+					{feedbackList.map((feedback) => {
+						const {
+							id,
+							feeling,
+							understanding,
+							support,
+							comments,
+							flagged,
+						} = feedback; // deconstructing
+						return (
+							<tr
+								key={id}
+								className={flagged ? "flagged" : "not-flagged"}
+							>
+								<td>{feeling}</td>
+								<td>{understanding}</td>
+								<td>{support}</td>
+								<td>{comments}</td>
+								<td>
+									<button
+										className="flag-btn"
+										onClick={() => handleFlagFeedback(id)}
+									>
+										Flag
+									</button>
+								</td>
+								<td>
+									<button
+										className="delete-btn"
+										onClick={() =>
+											popupDeleteConfirmation(id)
+										}
+									>
+										Delete
+									</button>
+								</td>
+							</tr>
+						);
+					})}
+				</tbody>
+			</table>
+		</div>
 	);
 }
 
