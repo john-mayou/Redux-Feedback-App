@@ -29,4 +29,4 @@ Admins can:
 -   Run `npm run server`
 -   Run `npm run client`
 
-![Screenshot]()
+![Screenshot](AppScreenshot.png)
