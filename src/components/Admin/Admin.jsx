@@ -5,10 +5,14 @@ import { useEffect, useState } from "react";
 function Admin() {
 	const [feedbackList, setFeedbackList] = useState([]);
 
+	// on load
 	useEffect(() => {
 		fetchFeedback();
 	}, []);
 
+	/**
+	 * fetches feedback from server, sets local state with response
+	 */
 	const fetchFeedback = () => {
 		axios
 			.get("/feedback")
@@ -20,14 +24,18 @@ function Admin() {
 			});
 	};
 
+	/**
+	 * Sends a update request to server that toggles "flagged" boolean
+	 * @param {number} id
+	 */
 	const handleFlagFeedback = (id) => {
+		// finds current state of click event
 		const currentFlagState = feedbackList.find(
 			(feedback) => feedback.id === id
 		).flagged;
-		console.log(id, currentFlagState);
 
 		axios
-			.put(`/feedback/${id}`, { newState: !currentFlagState })
+			.put(`/feedback/${id}`, { newState: !currentFlagState }) // inverse of current
 			.then(() => {
 				fetchFeedback();
 			})
@@ -36,6 +44,11 @@ function Admin() {
 			});
 	};
 
+	/**
+	 * Swal popup that happens in between delete click event and actual deletion
+	 * On success, a delete function is called
+	 * @param {number} id
+	 */
 	const popupDeleteConfirmation = (id) => {
 		Swal.fire({
 			title: "Are you sure?",
@@ -53,6 +66,10 @@ function Admin() {
 		});
 	};
 
+	/**
+	 * Sends delete request via query params with the id of the click event, re-fetches changes
+	 * @param {number} id
+	 */
 	const handleDeleteFeedback = (id) => {
 		axios
 			.delete(`/feedback/${id}`)
